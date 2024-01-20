@@ -1,5 +1,5 @@
 ## Live demo
-[Splash](https://img-gallery-nu.vercel.app)
+[Splash](https://splash-delta.vercel.app/)
 
 ## External Libraries:
 - TailwindCSS

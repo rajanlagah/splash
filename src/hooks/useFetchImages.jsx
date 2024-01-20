@@ -71,6 +71,7 @@ const useFetchImages = () => {
       setisLoadingImages(false);
       setImgs(response);
     } catch (e) {
+      setisLoadingImages(false);
       console.log(e);
       setisError(true);
     }
@@ -95,6 +96,7 @@ const useFetchImages = () => {
       setImgs(response.results, prevQuery !== query, query);
     } catch (e) {
       setisError(true);
+      setisLoadingImages(false);
       console.log(e);
     }
   };

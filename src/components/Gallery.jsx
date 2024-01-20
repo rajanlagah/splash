@@ -29,7 +29,7 @@ const Gallery = ({
     };
   }, [row4EndObserver.current]);
 
-  if (!isLoading && imagesRow1.length === 0) {
+  if (!isError && !isLoading && imagesRow1.length === 0) {
     return (
       <div className="flex justify-center">
         <h3>No Image found. Try some other word</h3>
@@ -38,59 +38,56 @@ const Gallery = ({
   }
 
   return (
-    <>
-      <div className="flex gap-2 flex-wrap w-full justify-center items-start p-4">
-        <div className="flex flex-col justify-center items-center gap-8 lg:w-1/5 md:w-1/3 w-full">
-          {imagesRow1.map((item, index) => (
-            <ImageCard
-              onChange={onChange}
-              key={item.id}
-              src={item.urls.regular}
-              user={item.user}
-              id={item.id}
-              alt_description={item.alt_description}
-            />
-          ))}
-        </div>
-        <div className="flex flex-col justify-center items-center gap-8 lg:w-1/5 md:w-1/3 w-full">
-          {imagesRow2.map((item, index) => (
-            <ImageCard
-              onChange={onChange}
-              key={item.id}
-              src={item.urls.regular}
-              user={item.user}
-              id={item.id}
-              alt_description={item.alt_description}
-            />
-          ))}
-        </div>
-        <div className="flex flex-col justify-start items-center gap-8 lg:w-1/5 md:w-1/3 w-full">
-          {imagesRow3.map((item, index) => (
-            <ImageCard
-              onChange={onChange}
-              key={item.id}
-              src={item.urls.regular}
-              user={item.user}
-              id={item.id}
-              alt_description={item.alt_description}
-            />
-          ))}
-        </div>
-        <div className="flex flex-col justify-start items-center gap-8 lg:w-1/5 md:w-1/3 w-full">
-          {imagesRow4.map((item, index) => (
-            <ImageCard
-              onChange={onChange}
-              key={item.id}
-              src={item.urls.regular}
-              user={item.user}
-              id={item.id}
-              alt_description={item.alt_description}
-            />
-          ))}
-          {!disableLoading && !isError && moreImgsAvailable && (
-            <p ref={row4EndObserver}>Loading...</p>
-          )}
-        </div>
+    <div className="w-4/5 m-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
+        {[
+          ...imagesRow1,
+          ...imagesRow2,
+          ...imagesRow3,
+          ...imagesRow4,
+        ].map((item, index) => (
+          <ImageCard
+            onChange={onChange}
+            key={item.id}
+            src={item.urls.regular}
+            user={item.user}
+            id={item.id}
+            alt_description={item.alt_description}
+          />
+        ))}
+        {/* {imagesRow2.map((item, index) => (
+          <ImageCard
+            onChange={onChange}
+            key={item.id}
+            src={item.urls.regular}
+            user={item.user}
+            id={item.id}
+            alt_description={item.alt_description}
+          />
+        ))}
+        {imagesRow3.map((item, index) => (
+          <ImageCard
+            onChange={onChange}
+            key={item.id}
+            src={item.urls.regular}
+            user={item.user}
+            id={item.id}
+            alt_description={item.alt_description}
+          />
+        ))}
+        {imagesRow4.map((item, index) => (
+          <ImageCard
+            onChange={onChange}
+            key={item.id}
+            src={item.urls.regular}
+            user={item.user}
+            id={item.id}
+            alt_description={item.alt_description}
+          />
+        ))} */}
+        {!disableLoading && !isError && moreImgsAvailable && (
+          <p ref={row4EndObserver}>Loading...</p>
+        )}
       </div>
       {!disableLoading && !moreImgsAvailable && (
         <div className="flex justify-center items-center">
@@ -103,7 +100,7 @@ const Gallery = ({
           <p>Try after 1 hour</p>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

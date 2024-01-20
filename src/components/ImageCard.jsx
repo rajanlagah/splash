@@ -27,34 +27,36 @@ const ImageCard = ({ src, alt_description, user, id, onChange }) => {
 
   return (
     <div
-      className="relative max-w-96"
+      className={`relative max-w-96 `}
       onMouseEnter={() => setisHover(true)}
       onMouseLeave={() => setisHover(false)}
     >
-      {isHover && (
-        <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-t from-black via-transparent to-black/10 p-4 flex flex-col justify-between items-end">
-          <button
-            onClick={handleLike}
-            className={`${isLiked ? "text-red-700" : "text-gray-500"}`}
-          >
-            <p className="text-3xl bg-white h-8 w-8  cursor-pointer rounded-3xl flex justify-center items-center">
-              &hearts;
-            </p>
-          </button>
-          {user.portfolio_url ? (
-            <p className="hover:underline text-lg w-full text-left bottom-2 left-2 text-white cursor-pointer">
-              <Link target="_blank" to={user.portfolio_url}>
+      <div className="relative">
+        {isHover && (
+          <div className="absolute top-0 left-0 h-full right-0 bg-gradient-to-t from-black via-transparent to-black/10 p-4 flex flex-col justify-between items-end">
+            <button
+              onClick={handleLike}
+              className={`${isLiked ? "text-red-700" : "text-gray-500"}`}
+            >
+              <p className="text-3xl bg-white h-8 w-8  cursor-pointer rounded-3xl flex justify-center items-center">
+                &hearts;
+              </p>
+            </button>
+            {user.portfolio_url ? (
+              <p className="hover:underline text-lg w-full text-left bottom-2 left-2 text-white cursor-pointer">
+                <Link target="_blank" to={user.portfolio_url}>
+                  {user.name}
+                </Link>
+              </p>
+            ) : (
+              <p className="text-lg w-full text-left bottom-2 left-2 text-white cursor-pointer">
                 {user.name}
-              </Link>
-            </p>
-          ) : (
-            <p className="text-lg w-full text-left bottom-2 left-2 text-white cursor-pointer">
-              {user.name}
-            </p>
-          )}
-        </div>
-      )}
-      <img src={src} alt={alt_description} />
+              </p>
+            )}
+          </div>
+        )}
+        <img src={src} alt={alt_description} className="w-full" />
+      </div>
     </div>
   );
 };

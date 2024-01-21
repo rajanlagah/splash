@@ -5,16 +5,8 @@ import Gallery from "../components/Gallery";
 import Header from "../components/Header";
 
 const Landing = () => {
-  const {
-    fetchImgs,
-    isLoadingImages,
-    imagesRow1,
-    imagesRow2,
-    imagesRow3,
-    moreImgsAvailable,
-    imagesRow4,
-    isError
-  } = useFetchImages();
+  const { fetchImgs, isLoadingImages, imagesRow, moreImgsAvailable, isError } =
+    useFetchImages();
   const [pageNumber, setpageNumber] = useState(1);
 
   useEffect(() => {
@@ -27,12 +19,8 @@ const Landing = () => {
       <Gallery
         isError={isError}
         pageNumber={pageNumber}
-        imagesRow1={imagesRow1}
+        imagesRow={imagesRow}
         moreImgsAvailable={moreImgsAvailable}
-        imagesRow2={imagesRow2}
-        imagesRow3={imagesRow3}
-        imagesRow4={imagesRow4}
-        // pageEndObserver={pageEndObserver}
         isLoading={isLoadingImages}
         handleNext={() => setpageNumber((prev) => prev + 1)}
       />

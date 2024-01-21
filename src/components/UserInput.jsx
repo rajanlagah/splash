@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "./LoadingSpinner";
 
@@ -12,12 +12,18 @@ const UserInput = ({ presetValue, callback, isLoadingImages }) => {
       callback(queryInput);
     }
   };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
 
   return (
     <div className="flex gap-2 w-10/12 md:w-3/5">
       <input
         onChange={(e) => setQueryInput(e.target.value)}
         type="text"
+        onKeyDown={handleKeyDown}
         value={queryInput}
         placeholder="Search image"
         className="focus:border-none outline-none p-2 w-full rounded placeholder-gray-600 shadow-lg"

@@ -5,12 +5,9 @@ import usePagination from "../hooks/usePagination";
 const Gallery = ({
   onChange = () => undefined,
   disableLoading,
-  imagesRow1,
+  imagesRow,
   moreImgsAvailable = true,
-  imagesRow2,
-  imagesRow3,
   isLoading,
-  imagesRow4,
   isError,
   handleNext = () => undefined
 }) => {
@@ -28,24 +25,19 @@ const Gallery = ({
       }
     };
   }, [row4EndObserver.current]);
-
-  if (!isError && !isLoading && imagesRow1.length === 0) {
+  
+  if (!disableLoading && !isError && !isLoading && imagesRow.length === 0) {
     return (
       <div className="flex justify-center">
         <h3>No Image found. Try some other word</h3>
       </div>
     );
   }
-
+  
   return (
     <div className="w-4/5 m-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
-        {[
-          ...imagesRow1,
-          ...imagesRow2,
-          ...imagesRow3,
-          ...imagesRow4,
-        ].map((item, index) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1 m-auto">
+        {imagesRow.map((item, index) => (
           <ImageCard
             onChange={onChange}
             key={item.id}
@@ -55,36 +47,6 @@ const Gallery = ({
             alt_description={item.alt_description}
           />
         ))}
-        {/* {imagesRow2.map((item, index) => (
-          <ImageCard
-            onChange={onChange}
-            key={item.id}
-            src={item.urls.regular}
-            user={item.user}
-            id={item.id}
-            alt_description={item.alt_description}
-          />
-        ))}
-        {imagesRow3.map((item, index) => (
-          <ImageCard
-            onChange={onChange}
-            key={item.id}
-            src={item.urls.regular}
-            user={item.user}
-            id={item.id}
-            alt_description={item.alt_description}
-          />
-        ))}
-        {imagesRow4.map((item, index) => (
-          <ImageCard
-            onChange={onChange}
-            key={item.id}
-            src={item.urls.regular}
-            user={item.user}
-            id={item.id}
-            alt_description={item.alt_description}
-          />
-        ))} */}
         {!disableLoading && !isError && moreImgsAvailable && (
           <p ref={row4EndObserver}>Loading...</p>
         )}

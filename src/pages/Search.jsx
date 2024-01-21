@@ -10,10 +10,7 @@ const SearchPage = () => {
   let { query } = useParams();
   const {
     queryImgs,
-    imagesRow1,
-    imagesRow2,
-    imagesRow3,
-    imagesRow4,
+    imagesRow,
     moreImgsAvailable,
     isLoadingImages,
     isError
@@ -39,11 +36,8 @@ const SearchPage = () => {
         <Gallery
           moreImgsAvailable={moreImgsAvailable}
           pageNumber={pageNumber}
-          imagesRow1={imagesRow1}
-          imagesRow2={imagesRow2}
-          imagesRow3={imagesRow3}
+          imagesRow={imagesRow}
           isError={isError}
-          imagesRow4={imagesRow4}
           isLoading={isLoadingImages}
           handleNext={() => setpageNumber((prev) => prev + 1)}
         />

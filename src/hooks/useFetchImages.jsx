@@ -5,47 +5,20 @@ const useFetchImages = () => {
   const [prevQuery, setprevQuery] = useState("");
   const [moreImgsAvailable, setmoreImgsAvailable] = useState(true);
   const [isError, setisError] = useState(false);
-  const [imagesRow1, setImagesRow1] = useState([]);
-  const [imagesRow2, setImagesRow2] = useState([]);
-  const [imagesRow3, setImagesRow3] = useState([]);
-  const [imagesRow4, setImagesRow4] = useState([]);
+  const [imagesRow, setImagesRow] = useState([]);
   const [isLoadingImages, setisLoadingImages] = useState(false);
 
   const setImgs = (images, reset = false, query = "") => {
-    let row1 = [];
-    let row2 = [];
-    let row3 = [];
-    let row4 = [];
-    for (let i = 0; i < images.length; i++) {
-      if ((i + imagesCount) % 4 == 0) {
-        row1.push(images[i]);
-      }
-      if ((i + imagesCount) % 4 == 1) {
-        row2.push(images[i]);
-      }
-      if ((i + imagesCount) % 4 == 2) {
-        row3.push(images[i]);
-      }
-      if ((i + imagesCount) % 4 == 3) {
-        row4.push(images[i]);
-      }
-    }
     if (reset) {
-      setImagesRow1([...row1]);
-      setImagesRow2([...row2]);
-      setImagesRow3([...row3]);
-      setImagesRow4([...row4]);
+      setImagesRow([...images]);
       setImagesCount(images.length);
     } else {
-      if (row1.length == 0) {
+      if (images.length == 0) {
         setmoreImgsAvailable(false);
       } else {
         setmoreImgsAvailable(true);
       }
-      setImagesRow1((prevImagesRow) => [...prevImagesRow, ...row1]);
-      setImagesRow2((prevImagesRow) => [...prevImagesRow, ...row2]);
-      setImagesRow3((prevImagesRow) => [...prevImagesRow, ...row3]);
-      setImagesRow4((prevImagesRow) => [...prevImagesRow, ...row4]);
+      setImagesRow((prevImagesRow) => [...prevImagesRow, ...images]);
       setImagesCount(imagesCount + images.length);
     }
     setprevQuery(query);
@@ -105,10 +78,7 @@ const useFetchImages = () => {
     isLoadingImages,
     queryImgs,
     moreImgsAvailable,
-    imagesRow1,
-    imagesRow2,
-    imagesRow3,
-    imagesRow4,
+    imagesRow,
     isError
   };
 };

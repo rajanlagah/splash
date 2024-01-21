@@ -8,45 +8,21 @@ import { Link } from "react-router-dom";
 const UserPage = () => {
   const { getAllImgs } = useContext(LikedImages);
   const [isLikedImgsAvailable, setisLikedImgsAvailable] = useState([]);
-  const [imagesRow1, setImagesRow1] = useState([]);
-  const [imagesRow2, setImagesRow2] = useState([]);
-  const [imagesRow3, setImagesRow3] = useState([]);
-  const [imagesRow4, setImagesRow4] = useState([]);
-
-  const setImgs = (images) => {
-    if (Array.isArray(images) && images.length > 0) {
-      setisLikedImgsAvailable(true);
-    } else {
-      setisLikedImgsAvailable(false);
-    }
-    let row1 = [];
-    let row2 = [];
-    let row3 = [];
-    let row4 = [];
-    for (let i = 0; i < images.length; i++) {
-      if (i % 4 === 0) {
-        row1.push(images[i]);
-      }
-      if (i % 4 === 1) {
-        row2.push(images[i]);
-      }
-      if (i % 4 === 2) {
-        row3.push(images[i]);
-      }
-      if (i % 4 === 3) {
-        row4.push(images[i]);
-      }
-    }
-    setImagesRow1(row1);
-    setImagesRow2(row2);
-    setImagesRow3(row3);
-    setImagesRow4(row4);
-  };
+  const [imagesRow, setImagesRow] = useState([]);
 
   useEffect(() => {
-    let images = getAllImgs();
-    setImgs(images);
+    setImgs();
   }, [getAllImgs]);
+
+  const setImgs = () => {
+    let imgs = getAllImgs();
+    if (imgs.length == 0) {
+      setisLikedImgsAvailable(false);
+    } else {
+      setisLikedImgsAvailable(true);
+    }
+    setImagesRow(imgs);
+  };
 
   return (
     <>
@@ -57,12 +33,9 @@ const UserPage = () => {
         <>
           <h1 className="text-xl m-4">Liked Images</h1>
           <Gallery
-            imagesRow1={imagesRow1}
-            imagesRow2={imagesRow2}
-            imagesRow3={imagesRow3}
-            imagesRow4={imagesRow4}
+            imagesRow={imagesRow}
             disableLoading={true}
-            onChange={() => setImgs(getAllImgs())}
+            onChange={setImgs}
           />
         </>
         {!isLikedImgsAvailable && (
